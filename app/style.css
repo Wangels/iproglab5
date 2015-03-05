@@ -1,0 +1,215 @@
+#home{
+	background-image: url('images/background.jpg');
+	background-size:cover;
+}
+
+#makeDinnerContainer{
+	background-color:white;
+	min-height:100vh;
+	border-style:black;
+}
+
+#search, #top{
+	height:100px;
+	background-color: #FFBF5E;
+	border-style:solid;
+	border-color:black;
+	border-top:none;
+	border-right:none;
+	border-left:none;
+	padding-left:10px;
+}
+
+#top{
+	border-top:solid;
+	border-right:solid;
+}
+
+#dinnerOverviewDiv{
+	/*border-right:solid;*/
+	height:100%;
+	padding-top:20px;
+	min-height: 100%;
+
+	/*border-bottom:solid;
+	border-bottom-width:1px;*/
+}
+
+#backbutton{
+	position:absolute;
+	right:10px;
+}
+.form-control{
+	border-color:black;
+}
+
+h3{
+	margin-top:10px;
+	font-weight:bold;
+}
+
+h4{
+	font-size:15pt;
+	font-weight:bold;
+}
+
+h5{
+	font-weight: bold;
+}
+
+#header, #headerHome{
+	height:100px;
+	background-color: #DBDBDE;
+	border-style:solid;
+	border-color:black;
+	border-bottom:none;
+	border-left:none;
+
+}
+
+#headerHome{
+	background-color:#FFBF5E;
+	background:rgba(255,191,94, 0.8);
+	border-bottom:solid;
+}
+
+#intro{
+	width:50%;
+	background-color:white;
+	background:rgba(255,255,255, 0.8);
+	margin-top:100px;
+	padding: 10px;
+	border-radius:10px;
+}
+
+
+#sideView{
+	border-style:solid;
+	border-color:black;
+	padding:5px;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;
+	min-height:100%;
+}
+
+#dishOverview{
+	margin:10px;
+}
+
+#dishOverview a{
+	text-decoration: none;
+	color:black;
+}
+
+.dish{
+	width: 140px;
+	height: 200px;
+
+}
+
+.searchImg{
+	position: relative;
+	width: 140px;
+	height:140px;
+	border:solid;
+	
+}
+
+.dish h4{
+	position: absolute;
+	top: 0px;
+	left:20px;
+	width:140px;
+	font-size: 8pt;
+	line-height:200%;
+
+}
+
+.dish h4 span{
+	color:white;
+	background: rgb(0,0,0);
+	background: rgba(0,0,0,0.7);
+	padding:5px;
+	width:140px;
+
+}
+
+#ingredientView{
+	background: #FFBF5E;
+	min-height: 300px;
+	border-style:solid;
+	border-color:black;
+	border-top:none;
+	border-right:none;
+	padding:5px;
+}
+
+.dishImg{
+	width: 75%;
+	border-width:3px;
+	border-style:solid;
+
+}
+
+#mainView{
+	border-style:solid;
+	border-color:black;
+	border-bottom:none;
+	min-height:100%;
+
+}
+
+.container{
+	width:100%;
+}
+
+.btn{
+	background-color:#FF9900;
+	border-color:black;
+
+}
+
+.btn:hover{
+	background-color: #FFBF5E;
+	border-color:black;
+}
+
+.dinnerView{
+	text-align: right;
+}
+
+#total{
+	padding-top: 120px;
+	border-left:solid;
+}
+
+
+#printdiv{
+	border-top:solid;
+	padding:10px;
+}
+
+#printbutton{
+	display:block;
+	text-align: center;
+}
+
+.dishDescription img{
+	float:left;
+	border:solid;
+	margin-right:10px;
+}
+
+#dishPrep{
+	margin-bottom:10px;
+	margin-top:10px;
+	padding:20px;
+}
+
+.prepImg{
+	width:40%;
+}
+#bigContainer{
+	min-height:100%;
+}
