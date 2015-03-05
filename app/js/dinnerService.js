@@ -151,7 +151,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   }
 
-  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:api_key});
+  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:24,api_key:api_key});
   this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:api_key}); 
 
   // TODO in Lab 5: Add your model code from previous labs

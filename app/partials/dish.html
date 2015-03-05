@@ -1,7 +1,32 @@
+<div class='row' id='bigContainer'>
 <!-- We include the sidebar as it is shared across two screens. -->
-<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
-
-{{dish.Title}}
-
+	<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+	<div id='dishBigView'>
+		<div class='row' id='dishView'>
+			<div class='col-md-6' id="dishText">
+				<h2>{{dish.Title}}</h2>
+				<img ng-src="{{dish.ImageURL}}" class='dishImg'/>
+				<p>{{dish.Description}}</p>
+				<a href="#/search" class="btn btn-default" id="dishBack"><span class='glyphicon glyphicon-chevron-left'>back to Select Dish</span></a>
+				<h2>Preparation</h2>
+				<p>{{dish.Instructions}}</p>
+			</div>
+			<div class='col-md-6' id='ingredientView'>
+				<h4>Ingredients for {{getNumberOfGuests()}} people</h4>
+				<table class='table'>
+					<tr ng-repeat='ingredient in ingredients'>
+						<td> {{ingredient.MetricQuantity *getNumberOfGuests()}} {{ingredient.MetricUnit}}</td>
+						<td> {{ingredient.Name}} </td>
+						<td>SEK</td>
+						<td>{{ingredient.MetricQuantity *getNumberOfGuests()}}</td>
+					</tr>
+					<tr>
+						<td></td><td>SEK</td><td>{{getDishPrice()}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- TODO in Lab 5: Display the dish information including image, Description, 
 Instructions, Ingredients and total cost. -->
