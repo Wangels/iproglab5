@@ -15,17 +15,17 @@
 				<div class='col-md-6' id='ingredientView'>
 					<h4>Ingredients for {{getNumberOfGuests()}} people</h4>
 					<table class='table'>
-						<tr ng-repeat='ingredient in ingredients'>
-							<td> {{ingredient.MetricQuantity *getNumberOfGuests()}} {{ingredient.MetricUnit}}</td>
+						<tr ng-repeat='ingredient in dish.Ingredients'>
+							<td> {{round(ingredient.MetricQuantity *getNumberOfGuests())}} {{ingredient.MetricUnit}}</td>
 							<td> {{ingredient.Name}} </td>
 							<td>SEK</td>
-							<td>{{ingredient.MetricQuantity *getNumberOfGuests()}}</td>
+							<td>{{round(ingredient.MetricQuantity *getNumberOfGuests())}}</td>
 						</tr>
 						<tr>
-							<td></td><td>SEK</td><td>{{getDishPrice()}}</td>
+							<td></td><td></td><td>SEK</td><td>{{getDishPrice(dish)}}</td>
 						</tr>
 					</table>
-					<button ng-click='confirm()' type='button' class='btn btn-default' id='confirmDish'>Confirm Dish</button>
+					<button ng-click='confirm(dish)' type='button' class='btn btn-default' id='confirmDish'>Confirm Dish</button>
 				</div>
 			</div>
 		</div>
