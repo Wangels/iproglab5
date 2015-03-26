@@ -4,9 +4,10 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
   
   // TODO in Lab 5: you need to get the dish according to the routing parameter
    	$scope.dish = Dinner.Dish.get({id:$routeParams.dishId})
+
     
     $scope.getNumberOfGuests = function() {
-    return Dinner.getNumberOfGuests();
+    	return Dinner.getNumberOfGuests();
   	}
 
   	$scope.round = function(num){
@@ -19,7 +20,12 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
 
   	$scope.confirm = function(dish){
   		Dinner.addDishToMenu(dish)
+      Dinner.setPending(0)
   	}
+
+    $scope.setPending = function(dish){
+      Dinner.setPending(dish)
+    }
 
 
   // Check the app.js to figure out what is the paramName in this case

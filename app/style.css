@@ -1,13 +1,10 @@
-#home{
-	background-image: url('images/background.jpg');
+
+#homeContainer{
+	background-image: url('background.jpg');
 	background-size:cover;
 }
 
-#makeDinnerContainer{
-	background-color:white;
-	min-height:100vh;
-	border-style:black;
-}
+
 
 #search, #top{
 	height:100px;
@@ -26,13 +23,9 @@
 }
 
 #dinnerOverviewDiv{
-	/*border-right:solid;*/
 	height:100%;
 	padding-top:20px;
 	min-height: 100%;
-
-	/*border-bottom:solid;
-	border-bottom-width:1px;*/
 }
 
 #backbutton{
@@ -162,6 +155,8 @@ h5{
 
 .container{
 	width:100%;
+	min-height:100vh;
+	border-style:black;
 }
 
 .btn{

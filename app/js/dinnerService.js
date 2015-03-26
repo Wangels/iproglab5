@@ -41,12 +41,15 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
       pendingPrice = 0
     }
     else{
+
+      console.log('setpending')
       
       pendingPrice = this.getDishPrice(dishObject)
     }
   }
 
   this.getPending = function(){
+    console.log('getpending' + pendingPrice)
     return pendingPrice
   }
 
@@ -114,14 +117,12 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   this.getTotalMenuPrice = function() {
-
     var totalPrice = 0
     for(var i=0;i<menu.length;i++){
       totalPrice = totalPrice + this.getDishPrice(menu[i])
     }
 
     totalPrice = totalPrice + pendingPrice
-
     return totalPrice
   }
 

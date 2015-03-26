@@ -8,15 +8,19 @@
 
 	</div>
 
-	<button ng-click='confirm()' id='confirm' class='btn btn-default btn-lg'>Confirm Dinner</button>
+
 
 	<table class='table'><tr><th>Dish name</th><th>Cost</th><td></td></tr>
 		<tr ng-repeat='dish in menu'>
 			<td>{{dish.Title}}</td>
-			<td>dishPrice</td>			<!-- Fix later-->
-			<td><span id='remove' class='glyphicon glyphicon-remove'> </span></td> 
+			<td>SEK {{getDishPrice(dish)}}</td>
+			<td><button ng-click='remove(dish.RecipeID)'> <span id='remove' class='glyphicon glyphicon-remove'> </span></button></td> 
 		</tr>
+		<tr><td>Pending</td><td>SEK {{getPending}}</td><td></tr></tr>
+		<tr><td></td><td>SEK {{getTotalMenuPrice}}</td><td></tr></tr>
 	</table>
+
+	<a href='#/confirm' id='confirm' class='btn btn-default btn-lg'>Confirm Dinner</a>
 
 
 </div>

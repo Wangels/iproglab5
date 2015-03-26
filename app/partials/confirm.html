@@ -1,0 +1,36 @@
+<div class='container'>
+	<ng-include src="'partials/header.html'"></ng-include>
+	
+	<div id='dinnerOverview'>
+		<ng-include src="'partials/top.html'" ng-controller="TopCtrl"></ng-include>
+		<div class='row'>
+			<div class='col-md-12' id='dinnerOverviewDiv'>
+				<div class='row'>
+					<div class='col-md-2'>
+					</div>
+					<div ng-repeat='dish in menu' class='col-md-2'>
+						<div class='dish'>
+							<img ng-src='{{dish.ImageURL}}'/>
+							<h4><span>{{dish.Title}}</span></h4>
+							<p class='dinnerView'>{{getDishPrice(dish)}} SEK</p>
+						</div>
+					</div>
+					<div class='col-md-2' id='total'>
+						Total: <br/>
+						{{getTotalMenuPrice}} SEK
+					</div>	
+				</div>
+				<div class='row'>
+					<div class='col-md-2'/> 
+					<div class='col-md-2' id='printdiv'></div>
+					<div class='col-md-2' id='printdiv'> 
+						<a href='#/print' class='btn btn-default btn-lg' id='printbutton'>
+							Print full recipe
+						</a>
+					</div>
+					<div class='col-md-2' id='printdiv'></div>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>

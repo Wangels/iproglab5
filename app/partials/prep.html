@@ -1,0 +1,24 @@
+<div class='container'>
+	<ng-include src="'partials/header.html'"></ng-include>
+	<ng-include src="'partials/top.html'" ng-controller="TopCtrl"></ng-include>
+
+	<div class='row' id='prepOverviewContainer'>
+		<div class='col-md-12' id='prepOverview'>
+			<div ng-repeat='dish in menu' class='row' id='dishPrep'>
+				<div class='col-md-6'>
+					<div class='dishDescription'>
+						<img class='prepImg' ng-src='{{dish.ImageURL}}'/>
+						<h4><span>{{dish.Title}}</span></h4>
+						<br/>
+						<p>{{dish.Description}}</p>
+					</div>
+				</div>
+				<div class='col-md-6'>
+					<h5><span>Preparation</span></h5>
+					<br/>
+					<p>{{dish.Instructions}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

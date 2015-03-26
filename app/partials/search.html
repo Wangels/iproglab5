@@ -1,36 +1,34 @@
-<div class='row' id='bigContainer'>
+<div class='container'>
+	<ng-include src="'partials/header.html'"></ng-include>
 <!-- We include the sidebar as it is shared across two screens. -->
-	<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+	<div class='row' id='bigContainer'>
+		<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
 
-	<div class='col-md-9' id='mainView'>
-		<div id='selectDish'>
-		<div class='row' id='search'>
-			<div class='col-md-12'>
-				<h3>Select Dish</h3>
-				<input ng-model="query"/>
-				<button ng-click="search(query)">Find</button>
-			</div>
-		</div>
-		<div class='row'>
-			{{status}}
-		</div>
-		<div class='row' id='dishOverview'>
-			<div class='col-md-12'>
-				
-				 	<div ng-repeat="dish in dishes" class='col-md-3'>
-				 		<a ng-href="#/dish/{{dish.RecipeID}}">
-				 			<div class=dish>
-					 			<img ng-src="{{dish.ImageURL}}"/>
-					 			{{dish.Title}}
-					 		</div>
-					 	</a>
-				 	</div>
+		<div class='col-md-9' id='mainView'>
+			<div id='selectDish'>
+				<div class='row' id='search'>
+					<div class='col-md-12'>
+						<h3>Select Dish</h3>
+						<input ng-model="query"/>
+						<button ng-click="search(query)">Find</button>
+					</div>
+				</div>
+				<div class='row'>
+					{{status}}
+				</div>
+				<div class='row' id='dishOverview'>
+					<div class='col-md-12'>
+					 	<div ng-repeat="dish in dishes" class='col-md-3'>
+					 		<a ng-href="#/dish/{{dish.RecipeID}}">
+					 			<div class=dish>
+						 			<img ng-src="{{dish.ImageURL}}"/>
+						 			{{dish.Title}}
+						 		</div>
+						 	</a>
+					 	</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-
-<!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
-not support it in free version) and list all the dishes that match the search. -->
-
 </div>
