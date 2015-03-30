@@ -3,15 +3,41 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner',function ($resource) {
+dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   
   var api_key = 'dvxSUK163SzdpwzA1C825d98lxc5YmU1'
-  var numberOfGuests = 2
-  var menu = []
+  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:24,api_key:api_key});
+  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:api_key}); 
   var pendingPrice = 0
   var searchType = undefined
   var searchFilter = undefined
   var currentDish = undefined
+
+  this.getMenuList = function(){
+    var IDlist = $cookieStore.get("menu")
+    var menu = []
+    if(IDlist[0] != null){
+      for (var i=0; i<IDlist.length; i++){
+        menu.push(this.Dish.get({id:IDlist[i]}))
+      }
+    }
+    return menu
+  }
+
+
+  this.cookieGuests = function(){
+    var guests = $cookieStore.get("numberOfGuests")
+    if(guests){
+      return guests
+    }
+    return 2
+  }
+
+
+  var menu = this.getMenuList()
+  var numberOfGuests = this.cookieGuests()
+
+
 
 
   this.setNumberOfGuests = function(num) {
@@ -21,6 +47,8 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
     else{
       numberOfGuests = 0
     }
+
+    $cookieStore.put("numberOfGuests", numberOfGuests)
   }
 
   this.getNumberOfGuests = function() {
@@ -38,18 +66,16 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   this.setPending = function(dishObject){
     if(!dishObject){
+      console.log("in the wrong place")
       pendingPrice = 0
     }
     else{
-
-      console.log('setpending')
-      
+      console.log("in the right place")
       pendingPrice = this.getDishPrice(dishObject)
     }
   }
 
   this.getPending = function(){
-    console.log('getpending' + pendingPrice)
     return pendingPrice
   }
 
@@ -80,7 +106,6 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   //Returns all the dishes on the menu.
   this.getFullMenu = function() {
-
     return menu
   }
 
@@ -126,6 +151,15 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
     return totalPrice
   }
 
+//Helpfunction for cookies, converts dish-object-list to ID-list
+  this.menuIDs = function(){
+    var menuIDs = []
+    for (var i=0; i<menu.length; i++){
+      menuIDs.push(menu[i].RecipeID)
+    }
+    return menuIDs
+  }
+
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
   this.addDishToMenu = function(dishObject) {
@@ -138,22 +172,26 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
     }
     if(notInMenu){
         menu.push(dishObject)
+        var IDmenu = this.menuIDs()
+        $cookieStore.put("menu", IDmenu)
       }
 
   }
+
+
 
   //Removes dish from menu
   this.removeDishFromMenu = function(id) {
     for(key in menu){
       if(menu[key].RecipeID === id){
         menu.splice(key, 1)
+        $cookieStore.put("menu", this.menuIDs())
       }
     }
 
   }
 
-  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:24,api_key:api_key});
-  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:api_key}); 
+
 
   // TODO in Lab 5: Add your model code from previous labs
   // feel free to remove above example code
