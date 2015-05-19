@@ -70,8 +70,9 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
       pendingPrice = 0
     }
     else{
-      console.log("in the right place")
+
       pendingPrice = this.getDishPrice(dishObject)
+      console.log("in the right place " + pendingPrice)
     }
   }
 
@@ -135,6 +136,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
     }
 
     totalPrice = totalPrice*numberOfGuests
+    
     return Math.round(totalPrice)
 
 
