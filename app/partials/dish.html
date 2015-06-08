@@ -15,13 +15,13 @@
 						<p>{{dish.Instructions}}</p>
 					</div>
 					<div class='col-md-6' id='ingredientView'>
-						<h4>Ingredients for {{getNumberOfGuests()}} people</h4>
+						<h4>Ingredients for {{numberOfGuests}} people</h4>
 						<table class='table'>
 							<tr ng-repeat='ingredient in dish.Ingredients'>
-								<td> {{round(ingredient.MetricQuantity *getNumberOfGuests())}} {{ingredient.MetricUnit}}</td>
+								<td> {{round(ingredient.MetricQuantity *numberOfGuests)}} {{ingredient.MetricUnit}}</td>
 								<td> {{ingredient.Name}} </td>
 								<td>SEK</td>
-								<td>{{round(ingredient.MetricQuantity *getNumberOfGuests())}}</td>
+								<td>{{round(ingredient.MetricQuantity *numberOfGuests)}}</td>
 							</tr>
 							<tr>
 								<td></td><td></td><td>SEK</td><td>{{getDishPrice(dish)}}</td>

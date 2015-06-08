@@ -8,10 +8,12 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   var api_key = 'dvxSUK163SzdpwzA1C825d98lxc5YmU1'
   this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:24,api_key:api_key});
   this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:api_key}); 
-  var pendingPrice = 0
+  this.pendingPrice = 0
   var searchType = undefined
   var searchFilter = undefined
   var currentDish = undefined
+  this.totalMenuPrice = 0;
+
 
   this.getMenuList = function(){
     var IDlist = $cookieStore.get("menu")
@@ -35,24 +37,53 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
 
 
   var menu = this.getMenuList()
-  var numberOfGuests = this.cookieGuests()
+  this.numberOfGuests = this.cookieGuests()
+
+   //returns the price for a single dish
+  this.getDishPrice = function(dishObject){
+    var ingredientList = dishObject.Ingredients
+    var totalPrice = 0
+
+    for(key in ingredientList){
+      totalPrice = totalPrice + ingredientList[key].MetricQuantity
+    }
+
+    totalPrice = totalPrice*this.numberOfGuests
+    
+    return Math.round(totalPrice)
 
 
+  }
+
+  //Returns the total price of the menu (all the ingredients multiplied by number of guests).
+  this.setTotalMenuPrice = function() {
+    var totalPrice = 0
+    for(var i=0;i<menu.length;i++){
+      totalPrice = totalPrice + this.getDishPrice(menu[i])
+    }
+
+    totalPrice = totalPrice //+ this.pendingPrice
+    this.totalMenuPrice = totalPrice
+    console.log(this.totalMenuPrice)
+  }
+
+  //Give totalmenuprice a start value
+  this.setTotalMenuPrice()
 
 
   this.setNumberOfGuests = function(num) {
     if(num>0){
-      numberOfGuests = num
+      this.numberOfGuests = num
     }
     else{
-      numberOfGuests = 0
+      this.numberOfGuests = 0
     }
 
-    $cookieStore.put("numberOfGuests", numberOfGuests)
+    $cookieStore.put("numberOfGuests", this.numberOfGuests)
   }
 
   this.getNumberOfGuests = function() {
-    return numberOfGuests;
+    return this.numberOfGuests;
   }
 
   this.getSearchFilter = function(){
@@ -64,20 +95,25 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   }
   
 
-  this.setPending = function(dishObject){
+  /*this.setPending = function(dishObject){
     if(!dishObject){
       console.log("in the wrong place")
-      pendingPrice = 0
+      this.pendingPrice = 0
     }
     else{
 
-      pendingPrice = this.getDishPrice(dishObject)
-      console.log("in the right place " + pendingPrice)
+      this.pendingPrice = this.getDishPrice(dishObject)
+      console.log("in the right place " + this.pendingPrice)
     }
+  }*/
+
+  this.setPending = function(price){
+    this.pendingPrice = price;
+    console.log("Set pending", price)
   }
 
   this.getPending = function(){
-    return pendingPrice
+    return this.pendingPrice
   }
 
 
@@ -125,33 +161,8 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
     return ingredientList
   }
 
-  //returns the price for a single dish
-  this.getDishPrice = function(dishObject){
-    var ingredientList = dishObject.Ingredients
+ 
 
-    var totalPrice = 0
-
-    for(key in ingredientList){
-      totalPrice = totalPrice + ingredientList[key].MetricQuantity
-    }
-
-    totalPrice = totalPrice*numberOfGuests
-    
-    return Math.round(totalPrice)
-
-
-  }
-
-  //Returns the total price of the menu (all the ingredients multiplied by number of guests).
-  this.getTotalMenuPrice = function() {
-    var totalPrice = 0
-    for(var i=0;i<menu.length;i++){
-      totalPrice = totalPrice + this.getDishPrice(menu[i])
-    }
-
-    totalPrice = totalPrice + pendingPrice
-    return totalPrice
-  }
 
 //Helpfunction for cookies, converts dish-object-list to ID-list
   this.menuIDs = function(){
