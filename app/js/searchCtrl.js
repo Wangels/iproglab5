@@ -15,7 +15,7 @@ dinnerPlannerApp.controller('SearchCtrl', function ($scope,Dinner) {
 
 }
 
-	$scope.search(undefined)
+	$scope.search(undefined);
 
 	/*$scope.setPending= function(dish){
 		console.log("in the cloooooud")

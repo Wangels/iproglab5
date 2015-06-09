@@ -10,7 +10,7 @@
 						<h2>{{dish.Title}}</h2>
 						<img ng-src="{{dish.ImageURL}}" class='dishImg'/>
 						<p>{{dish.Description}}</p>
-						<a href="#/search" class="btn btn-default" id="dishBack"><span class='glyphicon glyphicon-chevron-left'>back to Select Dish</span></a>
+						<a href="#/search" class="btn btn-default" id="dishBack" ng-click='back()'><span class='glyphicon glyphicon-chevron-left'>back to Select Dish</span></a>
 						<h2>Preparation</h2>
 						<p>{{dish.Instructions}}</p>
 					</div>

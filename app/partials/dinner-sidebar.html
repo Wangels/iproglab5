@@ -16,8 +16,10 @@
 			<td>SEK {{getDishPrice(dish)}}</td>
 			<td><button ng-click='remove(dish.RecipeID)'> <span id='remove' class='glyphicon glyphicon-remove'> </span></button></td> 
 		</tr>
-		<tr><td>Pending</td><td ng-controller="DishCtrl">SEK {{getDishPrice(dish)}}</td><td></tr></tr>
-		<tr><td></td><td>SEK {{totalMenuPrice()}}</td><td></tr></tr>
+		
+		<tr><td><b>Total</b></td><td><b>SEK {{totalMenuPrice()}}</b></td><td></tr></tr>
+
+		<tr ng-if='inDish()'><td><i>Pending</i></td><td><i>SEK {{getDishPrice(dish)}}</i></td><td></tr></tr>
 	</table>
 
 	<a href='#/confirm' id='confirm' class='btn btn-default btn-lg'>Confirm Dinner</a>

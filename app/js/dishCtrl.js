@@ -2,8 +2,8 @@
 // information for one dish
 dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
 
-  // TODO in Lab 5: you need to get the dish according to the routing parameter
    	$scope.dish = Dinner.Dish.get({id:$routeParams.dishId})
+    Dinner.setCurrentDish($scope.dish);
     $scope.numberOfGuests = Dinner.numberOfGuests;
 
     
@@ -21,10 +21,14 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
 
   	$scope.confirm = function(dish){
   		Dinner.addDishToMenu(dish);
-      Dinner.setTotalMenuPrice();
+      Dinner.setCurrentDish(undefined)
+      //Dinner.setTotalMenuPrice();
   	}
 
-    
-  // Check the app.js to figure out what is the paramName in this case
+    $scope.back = function(){
+      Dinner.setCurrentDish(undefined)
+    }
+
+
   
 });

@@ -6,15 +6,14 @@
 dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   
   //var api_key = 'dvxSUK163SzdpwzA1C825d98lxc5YmU1'
-  var api_key = 'dvxN1s66v518v9D8j1Wx8aR56wl76tVE'
+  var api_key = 'dvxN1s66v518v9D8j1Wx8aR56wl76tVE';
   this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:24,api_key:api_key});
-  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:api_key}); 
-  this.pendingPrice = 0
-  var searchType = undefined
-  var searchFilter = undefined
-  var currentDish = undefined
-  this.totalMenuPrice = 0;
-
+  //this.pendingPrice = 0;
+  var searchType = undefined;
+  var searchFilter = undefined;
+  //this.totalMenuPrice = 0;
+  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:api_key});
+  this.currentDish = undefined; 
 
   this.getMenuList = function(){
     var IDlist = $cookieStore.get("menu")
@@ -36,9 +35,8 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
     return 2
   }
 
-
-  var menu = this.getMenuList()
-  this.numberOfGuests = this.cookieGuests()
+  var menu = this.getMenuList();
+  this.numberOfGuests = this.cookieGuests();
 
    //returns the price for a single dish
   this.getDishPrice = function(dishObject){
@@ -52,24 +50,20 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
     totalPrice = totalPrice*this.numberOfGuests
     
     return Math.round(totalPrice)
-
-
   }
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
-  this.setTotalMenuPrice = function() {
+  this.getTotalMenuPrice = function() {
     var totalPrice = 0
     for(var i=0;i<menu.length;i++){
       totalPrice = totalPrice + this.getDishPrice(menu[i])
     }
 
     totalPrice = totalPrice //+ this.pendingPrice
-    this.totalMenuPrice = totalPrice
-    console.log(this.totalMenuPrice)
+    return totalPrice
   }
 
-  //Give totalmenuprice a start value
-  this.setTotalMenuPrice()
+
 
 
   this.setNumberOfGuests = function(num) {
@@ -108,7 +102,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
     }
   }*/
 
-  this.setPending = function(price){
+  /*this.setPending = function(price){
     this.pendingPrice = price;
     console.log("Set pending", price)
   }
@@ -116,14 +110,11 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   this.getPending = function(){
     return this.pendingPrice
   }
+  */
 
-
-  this.getCurrentDish = function(){
-    return currentDish
-  }
 
   this.setCurrentDish = function(dishObject){
-    currentDish = dishObject
+    this.currentDish = dishObject
   }
 
   //Returns the dish that is on the menu for selected type 
@@ -206,21 +197,6 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   }
 
 
-
-  // TODO in Lab 5: Add your model code from previous labs
-  // feel free to remove above example code
-  // you will need to modify the model (getDish and getAllDishes) 
-  // a bit to take the advantage of Angular resource service
-  // check lab 5 instructions for details
-
-
-
-
-
-  // Angular service needs to return an object that has all the
-  // methods created in it. You can consider that this is instead
-  // of calling var model = new DinnerModel() we did in the previous labs
-  // This is because Angular takes care of creating it when needed.
   return this;
 
 });
