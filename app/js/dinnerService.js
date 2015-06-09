@@ -5,7 +5,8 @@
 // the next time.
 dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   
-  var api_key = 'dvxSUK163SzdpwzA1C825d98lxc5YmU1'
+  //var api_key = 'dvxSUK163SzdpwzA1C825d98lxc5YmU1'
+  var api_key = 'dvxN1s66v518v9D8j1Wx8aR56wl76tVE'
   this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:24,api_key:api_key});
   this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:api_key}); 
   this.pendingPrice = 0
