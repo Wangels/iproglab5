@@ -7,7 +7,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   
   //var api_key = 'dvxSUK163SzdpwzA1C825d98lxc5YmU1'
   var api_key = '3stL5NVP4s6ZkmK5gt4dci8a4zOQRpD4';
-  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:24,api_key:'3stL5NVP4s6ZkmK5gt4dci8a4zOQRpD4'});
+  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:24,api_key:api_key});
   //this.pendingPrice = 0;
   var searchType = undefined;
   var searchFilter = undefined;
