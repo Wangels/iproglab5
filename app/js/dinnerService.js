@@ -18,7 +18,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   this.getMenuList = function(){
     var IDlist = $cookieStore.get("menu")
     var menu = []
-    if(IDlist[0] != null){
+    if(IDlist != null){
       for (var i=0; i<IDlist.length; i++){
         menu.push(this.Dish.get({id:IDlist[i]}))
       }
